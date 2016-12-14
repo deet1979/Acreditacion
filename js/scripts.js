@@ -5,7 +5,6 @@ var search;
 
 function onDocumentReady() {
 	var ls = getData('json');
-	//$('#searchForm').submit(onFormSubmit);
 	$('#searchForm #word').on("keyup", onKeyUp);
 	if(ls) {
 		console.log("localStorage");
@@ -23,34 +22,13 @@ function onDocumentReady() {
 	}
 }
 
-function onFormSubmit() {
-	var w = $('#searchForm #word').val();
-	if(w.length > 2) {
-		console.log('resultados');
-		for(var i in p) {
-			var n = p[i].nombre;
-			var d = p[i].dni;
-			var r = $('.trow-'+i);
-			if(n.toLowerCase().indexOf(w) > -1){
-				console.log('nombre: ' + n + ', dni: ' + d + ', index: '+ n.toLowerCase().indexOf(w));
-			} else {
-				console.log('.trow-'+i);
-				r.addClass('hidden');
-			}
-		}
-	} else{
-		alert('escriba al menos 3 caracteres');
-	}
-	return false;
-}
-
 function onKeyUp() {
 	var w = $('#searchForm #word').val();
 	for(var i in p) {
 		var n = p[i].nombre;
 		var d = p[i].dni;
 		var r = $('.trow-'+i);
-		if(n.toLowerCase().indexOf(w) > -1){
+		if(n.toLowerCase().indexOf( w.toLowerCase() ) > -1) {
 			r.removeClass('hidden');
 		} else {
 			r.addClass('hidden');
